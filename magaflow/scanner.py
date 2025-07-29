@@ -1,10 +1,18 @@
-from pathlib import PurePath
+import os
+from pathlib import Path, PurePath
 from typing import Callable, Generator, Optional, Sequence
 
 from .core.file_asset import FileAsset
 from .core.rule import Rule
 from .core.types import PathLike
-from .core.utils import fast_scan
+
+
+def fast_scan(folder_path: PathLike) -> Generator[Path, None, None]:
+    for entry in os.scandir(folder_path):
+        if entry.is_file(follow_symlinks=False):
+            yield Path(entry.path)
+        elif entry.is_dir(follow_symlinks=False):
+            yield from fast_scan(entry.path)
 
 
 def scan_local_files(
