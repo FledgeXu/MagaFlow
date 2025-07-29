@@ -1,26 +1,9 @@
-import os
 from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import PurePath
-from typing import Any, Callable, Dict, List, Optional, Sequence, Set, Union
+from typing import Dict, List, Optional, Sequence, Set
 
-PathLike = Union[str, os.PathLike]
-
-
-@dataclass
-class Rule:
-    category: str
-    matcher: Callable[[PurePath], bool]
-    extractor: Callable[[PurePath], List[Any]] = field(
-        default_factory=lambda: (lambda _: [])
-    )
-
-
-@dataclass
-class FileAsset:
-    category: str
-    path: PurePath
-    group_keys: List[Any]
+from .asset import FileAsset
 
 
 @dataclass
