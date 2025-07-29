@@ -1,7 +1,10 @@
+import os
 from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import PurePath
-from typing import Any, Callable, Dict, List, Optional, Sequence, Set
+from typing import Any, Callable, Dict, List, Optional, Sequence, Set, Union
+
+PathLike = Union[str, os.PathLike]
 
 
 @dataclass
