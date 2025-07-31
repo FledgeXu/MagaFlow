@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Any, Optional, Union
 
-from flow.core.types import PathLike
+from ..core.types import PathLike
 
 Undefined: Any = object()
 

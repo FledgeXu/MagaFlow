@@ -1,9 +1,10 @@
 from typing import Callable, Optional
 
 import ray
-from flow.pipline.stage_function import StageFunction
-from flow.pipline.stage_function_config import StageFunctionConfig
 from returns.result import safe
+
+from .stage_function import StageFunction
+from .stage_function_config import StageFunctionConfig
 
 
 def pipeline_stage(name: Optional[str] = None, **resources):
