@@ -2,7 +2,7 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import PurePath
-from typing import Dict, List, Optional, Sequence, Set, Tuple
+from typing import Dict, List, Optional, Sequence, Set
 
 from .file_asset import FileAsset
 
@@ -58,5 +58,3 @@ class Sample:
 
         merged_name = name or "+".join(sorted(set(s.name for s in samples)))
         return Sample(name=merged_name, file_assets=merged_assets)
-
-
