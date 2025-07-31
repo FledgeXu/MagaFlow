@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-
-from .types import Extractor, Matcher
+from pathlib import PurePath
+from typing import Callable, List
 
 
 @dataclass
 class Rule:
     category: str
-    matcher: Matcher
-    extractor: Extractor = field(default_factory=lambda: (lambda _: []))
+    matcher: Callable[[PurePath], bool]
+    extractor: Callable[[PurePath], List[str]] = field(
+        default_factory=lambda: (lambda _: [])
+    )

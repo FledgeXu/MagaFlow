@@ -1,9 +1,17 @@
 from collections import defaultdict
 from dataclasses import dataclass, field
+from enum import Enum
 from pathlib import PurePath
-from typing import Dict, List, Optional, Sequence, Set
+from typing import Dict, List, Optional, Sequence, Set, Tuple
 
-from .asset import FileAsset
+from .file_asset import FileAsset
+
+
+class SampleStatus(str, Enum):
+    IDLE = "IDLE"
+    PROCESSING = "PROCESSING"
+    SUCCESS = "SUCCESS"
+    FAILURE = "FAILURE"
 
 
 @dataclass
@@ -11,6 +19,11 @@ class Sample:
     name: str
     file_assets: Dict[str, List[FileAsset]] = field(
         default_factory=lambda: defaultdict(list)
+    )
+    status: SampleStatus = SampleStatus.IDLE
+
+    _files_cache: Optional[Dict[str, List[PurePath]]] = field(
+        init=False, default=None, repr=False
     )
 
     def __post_init__(self):
@@ -45,3 +58,5 @@ class Sample:
 
         merged_name = name or "+".join(sorted(set(s.name for s in samples)))
         return Sample(name=merged_name, file_assets=merged_assets)
+
+
