@@ -7,8 +7,10 @@ from .stage_function import StageFunction
 from .stage_function_config import StageFunctionConfig
 
 
-def pipeline_stage(name: Optional[str] = None, **resources):
-    def decorator(fn: Callable):
+def pipeline_stage(
+    name: Optional[str] = None, **resources
+) -> Callable[[Callable], StageFunction]:
+    def decorator(fn: Callable) -> StageFunction:
         stage_name = name or fn.__name__
         config = StageFunctionConfig(name=stage_name, **resources)
 
