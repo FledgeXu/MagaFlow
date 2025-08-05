@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Callable, List
+from typing import Callable, Sequence
 
 from magaflow.core.types import PureOrPath
 
@@ -8,4 +8,4 @@ from magaflow.core.types import PureOrPath
 class Rule:
     category: str
     matcher: Callable[[PureOrPath], bool]
-    extractor: Callable[[PureOrPath], List[str]]
+    extractor: Callable[[PureOrPath], Sequence[str]]
